@@ -1,0 +1,18 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    height: 100%;
+    
+  font-family: "Segoe UI";
+}
+
+#main{
+    height: 100%;
+    background: #fff;
+}
+
+.testClass{
+    width: 500px;
+    height: 100%;
+}
