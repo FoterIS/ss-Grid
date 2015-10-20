@@ -1,233 +1,334 @@
 ﻿(function ($) {
-    var container;
-    var target;
-    var items = [];
-    var strinchItem;
-    var countItems = 0;
-    var addStyleContainer = function () {
-        if (target) {
-            target.addClass("ss-Grid");
-        }
-    };
-    var initContainer = function () {   
-        var gridContent = $("<div class=\"ss-Grid-Content\" id=\"ss-Grid-Content\"></div>");
-        target.append(gridContent);
-        $(gridContent).mCustomScrollbar({
-            theme: "ss-grid",
-            axis: "x",
-            callbacks:{
-                    onOverflowX: function(){
-                        var height=   $(".content .mCustomScrollBox").height();
-                        $(".content .mCustomScrollBox").height(height-15);
-                    },
-                    onOverflowXNone: function(){
-                        var height=   $(".content .mCustomScrollBox").height();
-                        $(".content .mCustomScrollBox").height(height+15);
-                    }
-            },
-            autoHideScrollbar: false,
-            scrollInertia: 200
-        });
+  var container;
+  var target;
+  var items = [];
+  var strenchItem;
+  var countItems = 0;
+  var addStyleContainer = function () {
+    if (target) {
+      target.addClass("ss-Grid");
+    }
+  };
+  var initContainer = function () {
+    var gridContent = $("<div class=\"ss-Grid-Content\" id=\"ss-Grid-Content\"></div>");
+    target.append(gridContent);
+    $(gridContent).mCustomScrollbar({
+      theme: "ss-grid",
+      axis: "x",
+      autoDraggerLength: true,
+      callbacks: {
+        //onOverflowX: function () {
+        //  var s = $(".content .mCustomScrollBox");
 
-        container = $(".ss-Grid-Content .mCSB_container");
-    };
-    
-    var initChild = function(options){
-                    var gridChildDom = $("<div class=\"ss-Grid-child\" id=\"ss-Grid-child-"+countItems+"\"></div>");
-                    var contentDom = $("<div class=\"content\"></div>");
-                    var titleDom = $("<section>" + options.title + "</section>");
-                    var headerDom = $("<div class=\"header\"></div>");
-                    var navDom = $("<section></section>");
-                    var closeDom = $("<div class=\"button buttonClose\"><div class=\"close\"></div></div>");
-                    var restoreDown = $("<div class=\"button\"><div class=\"maximise\" id=\"ss-Grid-maximise-"+countItems+"\"></div></div>");
-                    var domObject = $(options.id);
-                    
-                    domObject.css("white-space", "normal")                    
-                    domObject.height("100%");
-                    
-                     items.push({
-                        id: options.id,
-                        target: gridChildDom,
-                        isOpen: options.isOpen,
-                        isRestoreDown: options.isRestoreDown,
-                        width:  domObject.width()  ,     
-                        countId:  countItems
-                    });
-                    
-                    
-                    if (!options.isOpen)
-                        gridChildDom.hide();
-                     
-                     if(options.isRestoreDown){                                                      
-                          restoreDown.click(function () {   
-                            methods.restoreDown(options.id);
-                        });                         
-                         
-                        navDom.append(restoreDown);                         
-                     }
-                        
-                    if (options.isClose) {                           
-                        closeDom.click(function () {
-                            methods.hideItem(options.id);
-                        });
-                        
-                        navDom.append(closeDom);
-                    }
-                        
-                    headerDom.append(titleDom);
-                    headerDom.append(navDom);
-                    contentDom.append(domObject);
-                    gridChildDom.append(headerDom);
-                    gridChildDom.append(contentDom);
-                    container.append(gridChildDom);
-                    
-                   
+        //  for (var i = 0;i< s.length; i++) {
+        //    var height = $(s[i]).height();
+        //    $(s[i]).height(height - 15);
+        //  }
 
-                    
-                    var s = headerDom.height();
-                    var h = $(document).height();
-                    
-                     $(domObject).mCustomScrollbar({
-                        theme: "minimal-dark",
-                    });
 
-                    countItems++;
-                    $(".content .mCustomScrollBox").height(h-s-20);                
-    };
+        //},
+        //onOverflowXNone: function () {
 
-    var extendOptions = function(options){
-      return  $.extend({
-                    isClose: true,
-                    isRestoreDown: true,
-                    isStrench: true,
-                    title: "",
-                    id: undefined,
-                    isOpen: true,
-                    navigation: []
-                }, options);
+        //  var s = $(".content .mCustomScrollBox");
+
+        //  for (var i = 0; i < s.length; i++) {
+        //    var height = $(s[i]).height();
+        //    $(s[i]).height(height + 15);
+        //  }
+
+        //}
+      },
+      autoHideScrollbar: false,
+      scrollInertia: 200
+    });
+
+    container = $(".ss-Grid-Content .mCSB_container");
+  };
+
+  var initChild = function (options) {
+    var gridChildDom = $("<div class=\"ss-Grid-child\" id=\"ss-Grid-child-" + countItems + "\"></div>");
+    var contentDom = $("<div class=\"content\"></div>");
+    var titleDom = $("<section>" + options.title + "</section>");
+    var headerDom = $("<div class=\"header\"></div>");
+    var navDom = $("<section></section>");
+    var closeDom = $("<div class=\"ss-Grid-button ss-Grid-buttonClose\"><div class=\"ss-Grid-close\"></div></div>");
+    var restoreDown = $("<div class=\"ss-Grid-button\"><div class=\"ss-Grid-maximise\" id=\"ss-Grid-maximise-" + countItems + "\"></div></div>");
+    var domObject = $(options.id);
+
+    domObject.css("white-space", "normal")
+    domObject.height("100%");
+
+    items.push({
+      id: options.id,
+      target: gridChildDom,
+      isOpen: options.isOpen,
+      isScroll: options.isScroll,
+      isRestoreDown: options.isRestoreDown,
+      width: domObject.width(),
+      countId: countItems,
+      callback: options.callback
+    });
+
+    if (!options.isOpen)
+      gridChildDom.hide();
+
+    if (options.navigation.length != 0) {
+
+      var length = options.navigation.length;
+
+      for (var i = 0; i < length; i++) {
+        navDom.append($(options.navigation[i].content));
+      }
+    }
+    if (options.isRestoreDown) {
+      restoreDown.click(function () {
+        methods.restoreDown(options.id);
+      });
+
+      navDom.append(restoreDown);
     }
 
-    var getItem = function (id) {
-        if (!id)
-            $.error('id не определен');
+    if (options.isClose) {
+      closeDom.click(function () {
+        methods.hideItem(options.id);
+      });
 
-        var length = items.length;
-        for (var i = 0; i < length; i++) {
-            if (items[i].id === id) {
-                return items[i];
-            }
+      navDom.append(closeDom);
+    }
 
+    headerDom.append(titleDom);
+    headerDom.append(navDom);
+
+    contentDom.append(domObject);
+    gridChildDom.append(headerDom);
+    gridChildDom.append(contentDom);
+    container.append(gridChildDom);
+
+    var s = 30;//$(headerDom).height()
+    var h = $(document).height();
+
+    if (options.isScroll) {
+      $(domObject).mCustomScrollbar({
+        theme: "dark",
+        scrollInertia: 200
+      });
+
+      $(".content .mCustomScrollBox").height(h - s - 20 - $("header").height());
+
+    } else {
+      $(".content " + options.id).height(h - s - 20 - $("header").height());
+    }
+
+    countItems++;
+    
+    if (options.callback.addedContent)
+      options.callback.addedContent.call(this);
+  };
+
+  var extendOptions = function (options) {
+    return $.extend({
+      isClose: true,
+      isRestoreDown: true,
+      isStrench: true,
+      callback: callback,
+      isScroll: true,
+      title: "",
+      id: undefined,
+      isOpen: true,
+      navigation: []
+    }, options);
+  }
+
+  var getItem = function (id) {
+    if (!id)
+      $.error('id не определен');
+
+    var length = items.length;
+    for (var i = 0; i < length; i++) {
+      if (items[i].id === id) {
+        return items[i];
+      }
+    }
+
+    $.error(id + ' не найден');
+
+  };
+
+
+  var callback = {
+    onChangedSizeWindow: function () { },
+    addedConten: function () { }
+  }
+
+  var resize = function () {
+    for (var i = 0; i < countItems; i++) {
+      var item = items[i];
+      var s = 30;
+      var h = $(document).height();
+      if (item.isScroll) {
+        $(".content .mCustomScrollBox").height(h - s - 20 - $("header").height());
+      } else {
+
+        $(".content " + item.id).height(h - s - 20 - $("header").height());
+      }
+
+
+    }
+
+  }
+
+
+
+
+  var methods = {
+    init: function (options) {
+      return this.each(function () {
+        var $this = $(this),
+            data = $this.data('ss-Grid');
+
+        if (!data) {
+          $(this).data('ss-Grid', {
+            target: $this
+          });
+          target = $this;
+          addStyleContainer();
+          initContainer();
+          $(window).resize(function () {
+            resize();
+          });
+
+        } else {
+          target = data.target;
         }
+      });
+    },
+    destroy: function () {
+    },
+    addItem: function (options) {
+      return this.each(function () {
+        if (!options)
+          return;
 
-    };
+        var optionsCout = options.length;
 
-    var methods = {
-        init: function (options) {
-            return this.each(function () {
-                var $this = $(this),
-                    data = $this.data('ss-Grid');
-
-                if (!data) {
-                    $(this).data('ss-Grid', {
-                        target: $this
-                    });
-                    target = $this;
-                    addStyleContainer();
-                    initContainer();
-                } else {
-                    target = data.target;
-                }
-            });
-        },
-        destroy: function () {
-        },
-        addItem: function (options) {
-            return this.each(function () {                            
-                if(!options)
-                 return;
-                 
-                var optionsCout = options.length;
-                
-                if(!optionsCout){  
-                   var opt = extendOptions(options)
-                    
-                                      
-                    if(!opt.id)
-                        return;
-                        
-                    initChild(opt); 
-                }else{
-                    for (var i = 0; i < optionsCout; i++) {
-                       var option =   extendOptions(options[i])
-                       
-                            if(!option.id)
-                                continue;
-                        
-                        initChild(option); 
-                    }  
-                }
-            });
-
-        },
-        getStateItem: function (id) {
-            return getItem(id).isOpen;
-        },
-        showItem: function (id) {
-            var target = getItem(id);
+        if (!optionsCout) {
+          var opt = extendOptions(options)
 
 
-            target.isOpen = !target.isOpen;
-            target.target.show();
-        },
-        hideItem: function (id) {
-            var target = getItem(id);
+          if (!opt.id)
+            return;
 
-            target.isOpen = !target.isOpen;
+          initChild(opt);
+        } else {
+          for (var i = 0; i < optionsCout; i++) {
+            var option = extendOptions(options[i])
 
-            target.target.hide();
+            if (!option.id)
+              continue;
 
-        },
-        restoreDown: function (id) {
-            var target = getItem(id);
-
-            if(target.isRestoreDown){
-                $(target.id).width($(document).width()-15);
-                $("#ss-Grid-maximise-"+target.countId).addClass("restoreDown");
-                $("#ss-Grid-maximise-"+target.countId).removeClass("maximise");
-                
-                target.isRestoreDown = !target.isRestoreDown;
-            }else{                
-                $("#ss-Grid-maximise-"+target.countId).removeClass("restoreDown");
-                $("#ss-Grid-maximise-"+target.countId).addClass("maximise");
-                $(target.id).width(target.width);
-                target.isRestoreDown = !target.isRestoreDown;
-            }         
-            	$("#ss-Grid-Content").mCustomScrollbar("scrollTo",target.id);
-            	$("#ss-Grid-Content").mCustomScrollbar("scrollTo",'+=5');
-                $("#ss-Grid-Content").mCustomScrollbar("update");
-        },
+            initChild(option);
+          }
+        }
         
-        stretchItem: function (index) {
-        },
-        unStretchItem: function (index) {
-        },
-        getAllOpenItems: function () {
-        },
-        update: function (content) {
+      });
 
-        }
-    };
+    },
+    getStateItem: function (id) {
+      return getItem(id).isOpen;
+    },
+    showItem: function (id) {
+      var target = getItem(id);
+      target.isOpen = !target.isOpen;
+      target.target.show();
+      var item = $(target.id + " .mCustomScrollBox");
+      item.css("max-height", "100%");
 
-    $.fn.gridSunRise = function (method) {
-        if (methods[method]) {
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
-            return methods.init.apply(this, arguments);
-        }
-        $.error('Метод с именем ' + method + ' не существует для jQuery.gridSunRise');
+      $("#ss-Grid-Content").mCustomScrollbar("update");
+    },
+    hideItem: function (id) {
+      var target = getItem(id);
 
-        return undefined;
-    };
+      target.isOpen = !target.isOpen;
+
+      target.target.hide();
+      $("#ss-Grid-Content").mCustomScrollbar("update");
+
+    },
+    restoreDown: function (id) {
+      var t = getItem(id);
+
+      if (t.isRestoreDown) {
+        $(t.id).width(target.width() - 15);
+        $("#ss-Grid-maximise-" + t.countId).addClass("ss-Grid-restoreDown");
+        $("#ss-Grid-maximise-" + t.countId).removeClass("ss-Grid-maximise");
+        t.isRestoreDown = !t.isRestoreDown;
+      } else {
+        $("#ss-Grid-maximise-" + t.countId).removeClass("ss-Grid-restoreDown");
+        $("#ss-Grid-maximise-" + t.countId).addClass("ss-Grid-maximise");
+        $(t.id).width(t.width);
+        t.isRestoreDown = !t.isRestoreDown;
+      }
+      methods.scrollTo(id);
+      $("#ss-Grid-Content").mCustomScrollbar("update");
+
+      if (t.callback.onChangedSizeWindow)
+        t.callback.onChangedSizeWindow.call(this);
+    },
+    scrollTo: function (id) {
+      var t = getItem(id);
+      $("#ss-Grid-Content").mCustomScrollbar("scrollTo", "#ss-Grid-child-" + t.countId);
+    },
+    addContent: function (content) {
+      var s = $(content.id + " .mCSB_container");
+
+      s.append(content.content);
+
+
+    },
+
+    clearContent: function (id) {
+      var s = $(id + " .mCSB_container");
+
+      s.empty();
+
+
+    },
+
+    stretchItem: function (index) {
+    },
+    unStretchItem: function (index) {
+    },
+    getAllOpenItems: function () {
+    },
+    update: function (content) {
+
+
+
+    }
+  };
+
+  //$.fn.myPlugin = function() {
+
+  //  // extend the options from pre-defined values:
+  //  var options = $.extend({
+  //      callback: function() { }
+  //  }, arguments[0]|| { });
+
+  //    // call the callback and apply the scope:
+  //    options.callback.call(this);
+
+  //  };
+
+  $.fn.gridSunRise = function (method) {
+    if (methods[method]) {
+      return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+    } else if (typeof method === 'object' || !method) {
+      return methods.init.apply(this, arguments);
+    }
+    $.error('Метод с именем ' + method + ' не существует для jQuery.gridSunRise');
+
+    return undefined;
+  };
 
 
 })(jQuery);
