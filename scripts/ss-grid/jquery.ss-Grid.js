@@ -350,6 +350,7 @@ var methods = {
             
         ssGrid[$this.id]= {
           items: [],
+          countItems: 0,
           methods: {
             minimize: function(){
               
@@ -399,7 +400,6 @@ var methods = {
 };
 
 $.fn.ssGrid = function (method) {
-   if (ssGrid.hasOwnProperty(this.id)) {
   
   
     if (methods[method]) {
@@ -410,5 +410,5 @@ $.fn.ssGrid = function (method) {
     $.error('Метод с именем ' + method + ' не существует для jQuery.ssGrid');
 
     return undefined;
-  }};
+  };
 })(jQuery);
