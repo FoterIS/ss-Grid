@@ -1,0 +1,34 @@
+<svg width="100.00000004136648" height="20.000000008273293" xmlns="http://www.w3.org/2000/svg">
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+  <g>
+    <title>background</title>
+    <rect id="canvas_background" fill="none" x="-1" y="-1" width="102" height="22"/>
+    <g id="canvasGrid" display="none">
+      <rect id="svg_1" fill="url(#gridpattern)" stroke-width="0" x="0" y="0" width="100%" height="100%"/>
+    </g>
+  </g>
+  <g>
+    <title>Layer 1</title>
+    <line id="svg_2" fill="none" stroke="#ffffff" x1="3.96552" y1="10" x2="15.9655" y2="10"/>
+    <line id="svg_4" fill="none" stroke="#ffffff" x1="43.5659" y1="16" x2="56" y2="4"/>
+    <line id="svg_6" fill="none" stroke="#ffffff" x1="56" y1="16" x2="44" y2="4"/>
+    <line id="svg_3" fill="none" stroke="#ffffff" x1="24.0246" y1="6" x2="24.0246" y2="15.7687"/>
+    <line id="svg_5" fill="none" stroke="#ffffff" x1="36" y1="3.47368" x2="36" y2="14.0677"/>
+    <line id="svg_7" fill="none" stroke="#ffffff" x1="23.5085" y1="16" x2="34" y2="16"/>
+    <line id="svg_8" fill="none" stroke="#ffffff" x1="33.5066" y1="6" x2="33.5066" y2="16.0136"/>
+    <line id="svg_10" fill="none" stroke="#ffffff" x1="23.8025" y1="6.48067" x2="34" y2="6.48067"/>
+    <line id="svg_11" fill="none" stroke="#ffffff" x1="26" y1="4" x2="26" y2="6.44044"/>
+    <line id="svg_12" fill="none" stroke="#ffffff" x1="25.5041" y1="3.96241" x2="35.6094" y2="3.96241"/>
+    <line id="svg_13" fill="none" stroke="#ffffff" x1="33.2497" y1="14" x2="36.5263" y2="14"/>
+    <line id="svg_9" fill="none" stroke="#ffffff" x1="64" y1="4.33657" x2="64" y2="16"/>
+    <line id="svg_14" fill="none" stroke="#ffffff" x1="76.9396" y1="4.27615" x2="76.9396" y2="15.9396"/>
+    <line id="svg_16" fill="none" stroke="#ffffff" x1="63.2628" y1="3.97403" x2="77.7128" y2="3.97403"/>
+    <line id="svg_17" fill="none" stroke="#ffffff" x1="63.2629" y1="15.5147" x2="77.7129" y2="15.5147"/>
+    <line id="svg_19" fill="none" stroke="#ffffff" x1="84" y1="15.7565" x2="96" y2="4"/>
+    <line id="svg_20" fill="none" stroke="#ffffff" x1="96.4954" y1="3.91361" x2="90" y2="3.91361"/>
+    <line id="svg_21" fill="none" stroke="#ffffff" x1="90.1029" y1="15.5752" x2="83.5168" y2="15.5752"/>
+    <line id="svg_22" fill="none" stroke="#ffffff" x1="84.2295" y1="16.302" x2="84.2295" y2="9.63136"/>
+    <line id="svg_23" fill="none" stroke="#ffffff" x1="95.7309" y1="10.4411" x2="95.7309" y2="3.77035"/>
+  </g>
+</svg>

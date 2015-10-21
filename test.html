@@ -17,10 +17,29 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
   <link rel="stylesheet" type="text/css" href="css/ss-grid/ss-grid.css">
+  
+  <script>
+    $(function(){
+      
+        $(window).resize(function () {
+            resize();
+          });
+          
+          resize();
+    });
+    
+    function resize(){
+      var h = $(window).height();
+      
+      $("#test").height(h-50);
+      $("#test").text(h-50);
+    }
+    
+  </script>
 </head>
 	<body>
-    <div id="main">
-      
-    </div>
+    
+    
+      <div style="background: #008fbf; width: 600px; margin: 30px;" id="test">  Test  </div>
 	</body>
 </html>

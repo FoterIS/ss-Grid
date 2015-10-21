@@ -319,13 +319,13 @@
 
   //  };
 
-  $.fn.gridSunRise = function (method) {
+  $.fn.ssGrid = function (method) {
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
     } else if (typeof method === 'object' || !method) {
       return methods.init.apply(this, arguments);
     }
-    $.error('Метод с именем ' + method + ' не существует для jQuery.gridSunRise');
+    $.error('Метод с именем ' + method + ' не существует для jQuery.ssGrid');
 
     return undefined;
   };

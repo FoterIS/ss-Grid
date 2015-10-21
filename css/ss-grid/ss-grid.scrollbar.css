@@ -24,12 +24,12 @@
 }
 
 .mCS-ss-grid.mCSB_scrollTools_horizontal, .mCS-3d-thick.mCSB_scrollTools_horizontal {
-
   height: 4px;
   bottom: 0px;
   /*box-shadow: inset 0 1px 1px rgba(0,0,0,.1),inset 0 0 14px rgba(0,0,0,.5);*/
 }
-.mCS-ss-grid.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+
+.mCS-ss-grid.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
   height: 6px;
 }
 
@@ -68,7 +68,6 @@
 }
 
 .mCS-ss-grid.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-ss-grid.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCS-ss-grid.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-ss-grid.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
-
   background: #006081;
 }
 
