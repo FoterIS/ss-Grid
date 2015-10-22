@@ -351,6 +351,8 @@ var methods = {
         ssGrid[$this.id]= {
           items: [],
           countItems: 0,
+   container: undefined,
+   target: undefined,
           methods: {
             minimize: function(){
               
